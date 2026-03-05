@@ -15,3 +15,5 @@ class Topic<T> {
 }
 
 export const sidebarToggleTopic = new Topic<void>
+
+export const numPlayers = new Topic<number>

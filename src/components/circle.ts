@@ -3,7 +3,7 @@ import { html } from "../html.ts"
 import { useEffect, useState } from "preact/hooks"
 
 export default function CircleTimer({
-  duration = 10, // seconds
+  duration = 30, // seconds
   size = 120,
   strokeWidth = 10,
   color = "#4ade80",
