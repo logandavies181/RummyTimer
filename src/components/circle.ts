@@ -17,41 +17,48 @@ export default function CircleTimer({
     if (timeLeft <= 0) return
 
     const interval = setInterval(() => {
-      setTimeLeft((t) => Math.max(0, t - 0.05))
-    }, 50)
+      setTimeLeft((t) => Math.max(0, t - 0.01))
+    }, 10)
 
     return () => clearInterval(interval)
   }, [timeLeft])
+
+  const onClick = () => {
+    setTimeLeft(duration)
+  }
 
   const progress = timeLeft / duration
   const dashOffset = circumference * (1 - progress)
 
   return html`
-    <svg
-      width=${size}
-      height=${size}
-    >
-      <circle
-        cx=${size / 2}
-        cy=${size / 2}
-        r=${radius}
-        stroke="#e5e7eb"
-        stroke-width=${strokeWidth}
-        fill="none"
-      />
+    <div class="flex">
+      <svg
+        onClick=${onClick}
+        width=${size}
+        height=${size}
+      >
+        <circle
+          cx=${size / 2}
+          cy=${size / 2}
+          r=${radius}
+          stroke="#e5e7eb"
+          stroke-width=${strokeWidth}
+          fill="none"
+        />
 
-      <circle
-        cx=${size / 2}
-        cy=${size / 2}
-        r=${radius}
-        stroke=${color}
-        stroke-width=${strokeWidth}
-        fill="none"
-        stroke-dasharray=${circumference}
-        stroke-dashoffset=${dashOffset}
-        stroke-linecap="round"
-        transform=${`rotate(-90 ${size / 2} ${size / 2})`}
-      />
-    </svg>
+        <circle
+          cx=${size / 2}
+          cy=${size / 2}
+          r=${radius}
+          stroke=${color}
+          stroke-width=${strokeWidth}
+          fill="none"
+          stroke-dasharray=${circumference}
+          stroke-dashoffset=${dashOffset}
+          stroke-linecap="butt"
+          transform=${`rotate(-90 ${size / 2} ${size / 2})`}
+        />
+      </svg>
+    </div>
   `
 }
