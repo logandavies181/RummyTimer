@@ -1,0 +1,5 @@
+dist
+.env.ts
+resp.json
+sw.js
+node_modules
