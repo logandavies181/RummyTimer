@@ -1,6 +1,6 @@
-import { html } from "../html.ts";
+import { html } from "../html.ts"
 
-import { useEffect, useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks"
 
 export default function CircleTimer({
   duration = 10, // seconds
@@ -8,26 +8,29 @@ export default function CircleTimer({
   strokeWidth = 10,
   color = "#4ade80",
 }) {
-  const [timeLeft, setTimeLeft] = useState(duration);
+  const [timeLeft, setTimeLeft] = useState(duration)
 
-  const radius = (size - strokeWidth) / 2;
-  const circumference = 2 * Math.PI * radius;
+  const radius = (size - strokeWidth) / 2
+  const circumference = 2 * Math.PI * radius
 
   useEffect(() => {
-    if (timeLeft <= 0) return;
+    if (timeLeft <= 0) return
 
     const interval = setInterval(() => {
-      setTimeLeft((t) => Math.max(0, t - 0.05));
-    }, 50);
+      setTimeLeft((t) => Math.max(0, t - 0.05))
+    }, 50)
 
-    return () => clearInterval(interval);
-  }, [timeLeft]);
+    return () => clearInterval(interval)
+  }, [timeLeft])
 
-  const progress = timeLeft / duration;
-  const dashOffset = circumference * (1 - progress);
+  const progress = timeLeft / duration
+  const dashOffset = circumference * (1 - progress)
 
   return html`
-    <svg width=${size} height=${size}>
+    <svg
+      width=${size}
+      height=${size}
+    >
       <circle
         cx=${size / 2}
         cy=${size / 2}

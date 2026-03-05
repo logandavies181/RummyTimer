@@ -2,7 +2,7 @@ import { render } from "preact"
 
 import { html } from "./src/html.ts"
 import { Navbar } from "./src/components/navbar.ts"
-import CircleTimer from "./src/components/circle.ts";
+import CircleTimer from "./src/components/circle.ts"
 
 // if ("serviceWorker" in navigator) {
 //   navigator.serviceWorker.register("sw.js", { scope: "/harmonies-planner/" })
