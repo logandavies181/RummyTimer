@@ -31,7 +31,7 @@ export default function CircleTimer({
   const dashOffset = circumference * (1 - progress)
 
   return html`
-    <div class="flex">
+    <div class="z-10">
       <svg
         onClick=${onClick}
         width=${size}
