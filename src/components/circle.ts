@@ -2,10 +2,9 @@ import { html } from "../html.ts"
 
 import { useEffect, useState } from "preact/hooks"
 
-import { timeLeftTopic } from "../state.ts"
+import { duration, timeLeftTopic, turnMoveTopic } from "../state.ts"
 
 export default function CircleTimer({
-  duration = 30, // seconds
   size = 120,
   strokeWidth = 10,
   color = "#4ade80",
@@ -28,9 +27,9 @@ export default function CircleTimer({
     }, 10)
   }, [])
 
-  const onClick = () => {
-    setTimeLeft(duration)
-  }
+  turnMoveTopic.Subscribe("circle", () => {
+    setTimeLeft(30)
+  })
 
   const progress = timeLeft / duration
   const dashOffset = circumference * (1 - progress)
@@ -38,7 +37,6 @@ export default function CircleTimer({
   return html`
     <div class="z-10">
       <svg
-        onClick=${onClick}
         width=${size}
         height=${size}
       >

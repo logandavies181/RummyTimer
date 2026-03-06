@@ -3,7 +3,7 @@ import { html } from "../html.ts"
 import { timeLeftTopic } from "../state.ts"
 
 export default function TimeNumber() {
-  const [timeLeft2, setTimeLeft2] = useState(69420) // FIXME: hardcoded
+  const [timeLeft2, setTimeLeft2] = useState(timeLeftTopic.value) // FIXME: hardcoded
 
   timeLeftTopic.Subscribe("timeNumber", setTimeLeft2)
 
