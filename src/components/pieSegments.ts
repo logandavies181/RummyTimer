@@ -51,10 +51,7 @@ function pieSegments({ segments = 6, size = 240, colors = [], activePlayer = 0 }
     const onClickFactory = (idx: number) => {
       const _idx = idx
       return () => {
-        console.log(`active is ${activePlayer}`)
-        console.log(`i am ${_idx}`)
         if (_idx == activePlayer) {
-          console.log("i am active")
           turnMoveTopic.Publish()
         }
       }
