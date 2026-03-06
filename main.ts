@@ -7,9 +7,9 @@ import Sidebar from "./src/components/sidebar.ts"
 import PieSegments from "./src/components/pieSegments.ts"
 import TimeNumber from "./src/components/timeNumber.ts"
 
-// if ("serviceWorker" in navigator) {
-//   navigator.serviceWorker.register("sw.js", { scope: "/harmonies-planner/" })
-// }
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js", { scope: "/" })
+}
 
 function App() {
   return html`

@@ -1,0 +1,16 @@
+{
+  "name": "RummyTimer",
+  "short_name": "RummyTimer",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#8ec5ff",
+  "theme_color": "#8ec5ff",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    }
+  ]
+}
