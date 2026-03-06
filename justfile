@@ -27,4 +27,4 @@ alias f := fmt
 @deploy: clean build
     #!/usr/bin/env bash
     cd dist
-    deno deploy --prod
+    deno deploy --prod --org logandavies181 --app rummytimer
