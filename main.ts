@@ -5,6 +5,7 @@ import { Navbar } from "./src/components/navbar.ts"
 import CircleTimer from "./src/components/circle.ts"
 import Sidebar from "./src/components/sidebar.ts"
 import PieSegments from "./src/components/pieSegments.ts";
+import TimeNumber from "./src/components/timeNumber.ts";
 
 // if ("serviceWorker" in navigator) {
 //   navigator.serviceWorker.register("sw.js", { scope: "/harmonies-planner/" })
@@ -21,6 +22,9 @@ function App() {
           </div>
           <div class="absolute" >
             <${PieSegments} />
+          </div>
+          <div class="absolute z-20 text-lg" >
+            <${TimeNumber} />
           </div>
         </div>
         <${Sidebar} />

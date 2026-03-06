@@ -2,6 +2,8 @@ import { html } from "../html.ts"
 
 import { useEffect, useState } from "preact/hooks"
 
+import { timeLeftTopic } from "../state.ts"
+
 export default function CircleTimer({
   duration = 30, // seconds
   size = 120,
@@ -14,14 +16,17 @@ export default function CircleTimer({
   const circumference = 2 * Math.PI * radius
 
   useEffect(() => {
-    if (timeLeft <= 0) return
+    setInterval(() => {
+      if (timeLeft <= 0) return
 
-    const interval = setInterval(() => {
-      setTimeLeft((t) => Math.max(0, t - 0.01))
+      // FIXME: probably not the best way to do things, but the interval here doesn't update otherwise
+      setTimeLeft((t) => {
+        const newTime = Math.max(0, t - 0.01)
+        timeLeftTopic.Publish(newTime)
+        return newTime
+      })
     }, 10)
-
-    return () => clearInterval(interval)
-  }, [timeLeft])
+  }, [])
 
   const onClick = () => {
     setTimeLeft(duration)
@@ -43,7 +48,7 @@ export default function CircleTimer({
           r=${radius}
           stroke="#e5e7eb"
           stroke-width=${strokeWidth}
-          fill="none"
+          fill="#dff2fe"
         />
 
         <circle
