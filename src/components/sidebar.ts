@@ -70,12 +70,13 @@ export default function Sidebar() {
             class="block w-full px-3 py-2.5 text-heading text-sm shadow-xs"
           >
             <option value="2">2</option>
-            <option selected value="3">3</option>
             <option
-              value="4"
+              selected
+              value="3"
             >
-              4
+              3
             </option>
+            <option value="4">4</option>
           </select>
         </div>
       </form>

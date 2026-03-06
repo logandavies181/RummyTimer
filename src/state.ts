@@ -3,9 +3,7 @@ type Callback<T> = (t: T) => void
 class Topic<T> {
   private callbacks = new Map<string, Callback<T>>()
 
-  constructor(
-    public value: T,
-  ) {}
+  constructor(public value: T) {}
 
   public Subscribe(name: string, cb: Callback<T>) {
     this.callbacks.set(name, cb)

@@ -1,6 +1,6 @@
-import { useState } from "preact/hooks";
+import { useState } from "preact/hooks"
 import { html } from "../html.ts"
-import { activePlayerTopic, numPlayersTopic, turnMoveTopic } from "../state.ts";
+import { activePlayerTopic, numPlayersTopic, turnMoveTopic } from "../state.ts"
 
 const colors = ["#fb2c36", "#2b7fff", "#05df72", "#ffdf20"]
 
@@ -14,7 +14,7 @@ export default function PieSegments() {
   return html`
     <div class="min-w-full min-h-full -z-10">
       <${pieSegments}
-        segments="${numPlayers}"
+        segments=${numPlayers}
         colors=${colors}
         activePlayer=${activePlayer}
       />
@@ -84,8 +84,8 @@ function pieSegments({ segments = 6, size = 240, colors = [], activePlayer = 0 }
       slices.push(
         html`<path
           d=${activePlayerArcPath}
-          stroke=black
-          fill=none
+          stroke="black"
+          fill="none"
           onClick=${onClickFactory(i)}
         />`,
       )

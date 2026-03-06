@@ -4,11 +4,7 @@ import { useEffect, useState } from "preact/hooks"
 
 import { duration, timeLeftTopic, turnMoveTopic } from "../state.ts"
 
-export default function CircleTimer({
-  size = 120,
-  strokeWidth = 10,
-  color = "#4ade80",
-}) {
+export default function CircleTimer({ size = 120, strokeWidth = 10, color = "#4ade80" }) {
   const [timeLeft, setTimeLeft] = useState(duration)
 
   const radius = (size - strokeWidth) / 2
