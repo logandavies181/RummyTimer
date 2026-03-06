@@ -1,6 +1,6 @@
-import { useState } from "preact/hooks";
+import { useState } from "preact/hooks"
 import { html } from "../html.ts"
-import { numPlayers, sidebarToggleTopic } from "../state.ts";
+import { numPlayers, sidebarToggleTopic } from "../state.ts"
 
 type EventTarget<T> = {
   target: {
@@ -18,13 +18,15 @@ export default function Sidebar() {
   sidebarToggleTopic.Subscribe("sidebar", onClick)
 
   const onInput = (e: EventTarget<number>) => {
-    numPlayers.Publish(e.target.value|0)
+    numPlayers.Publish(e.target.value | 0)
   }
 
   return html`
     <div
       id="drawer-form"
-      class="bg-sky-100 fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform ${show ? "" : "-translate-x-full"} w-80"
+      class="bg-sky-100 fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform ${show
+        ? ""
+        : "-translate-x-full"} w-80"
       tabindex="-1"
     >
       <div class="pb-4 mb-5 flex items-center">
@@ -53,17 +55,28 @@ export default function Sidebar() {
           <span class="sr-only">Close menu</span>
         </button>
       </div>
-      <form class="mb-6 space-y-4" onInput=${onInput}>
+      <form
+        class="mb-6 space-y-4"
+        onInput=${onInput}
+      >
         <div>
           <label
             for="numPlayers"
             class="block mb-2.5 text-sm font-medium text-heading"
-          >Number of Players
+            >Number of Players
           </label>
-          <select id="numPlayers" class="block w-full px-3 py-2.5 text-heading text-sm shadow-xs">
+          <select
+            id="numPlayers"
+            class="block w-full px-3 py-2.5 text-heading text-sm shadow-xs"
+          >
             <option value="2">2</option>
             <option value="3">3</option>
-            <option value="4" selected>4</option>
+            <option
+              value="4"
+              selected
+            >
+              4
+            </option>
           </select>
         </div>
       </form>

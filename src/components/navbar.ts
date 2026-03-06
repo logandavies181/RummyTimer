@@ -1,5 +1,5 @@
 import { html } from "../html.ts"
-import { sidebarToggleTopic } from "../state.ts";
+import { sidebarToggleTopic } from "../state.ts"
 
 export function Navbar() {
   const onClick = () => {

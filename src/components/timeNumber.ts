@@ -1,6 +1,6 @@
-import { useState } from "preact/hooks";
+import { useState } from "preact/hooks"
 import { html } from "../html.ts"
-import { timeLeftTopic } from "../state.ts";
+import { timeLeftTopic } from "../state.ts"
 
 export default function TimeNumber() {
   const [timeLeft2, setTimeLeft2] = useState(69420) // FIXME: hardcoded
@@ -11,5 +11,5 @@ export default function TimeNumber() {
 }
 
 function formatTimeLeft(n: number): number {
-  return Math.floor(n+0.9) // Hackily not just immediately go to 29
+  return Math.floor(n + 0.9) // Hackily not just immediately go to 29
 }
