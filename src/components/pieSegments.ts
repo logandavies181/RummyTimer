@@ -1,12 +1,18 @@
+import { useState } from "preact/hooks";
 import { html } from "../html.ts"
+import { numPlayersTopic } from "../state.ts";
 
-const colors = ["#f87171", "#fb923c", "#facc15"]
+const colors = ["#fb2c36", "#2b7fff", "#05df72", "#ffdf20"]
 
 export default function PieSegments() {
+  const [numPlayers, setNumPlayers] = useState(3) // TODO: hardcoded
+
+  numPlayersTopic.Subscribe("pieSegments", setNumPlayers)
+
   return html`
     <div class="min-w-full min-h-full -z-10">
       <${pieSegments}
-        segments="3"
+        segments="${numPlayers}"
         colors=${colors}
       />
     </div>
@@ -53,7 +59,7 @@ function pieSegments({ segments = 6, size = 240, colors = [] }) {
       width="100%"
       height="100%"
       viewBox=${`0 0 ${size} ${size}`}
-      transform="rotate(-90)"
+      transform="rotate(${segments == 2 ? "0" : "-90"})"
     >
       ${slices}
     </svg>

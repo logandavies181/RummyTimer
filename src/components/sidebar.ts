@@ -1,6 +1,6 @@
 import { useState } from "preact/hooks"
 import { html } from "../html.ts"
-import { numPlayers, sidebarToggleTopic } from "../state.ts"
+import { numPlayersTopic, sidebarToggleTopic } from "../state.ts"
 
 type EventTarget<T> = {
   target: {
@@ -18,7 +18,7 @@ export default function Sidebar() {
   sidebarToggleTopic.Subscribe("sidebar", onClick)
 
   const onInput = (e: EventTarget<number>) => {
-    numPlayers.Publish(e.target.value | 0)
+    numPlayersTopic.Publish(e.target.value | 0)
   }
 
   return html`
@@ -70,10 +70,9 @@ export default function Sidebar() {
             class="block w-full px-3 py-2.5 text-heading text-sm shadow-xs"
           >
             <option value="2">2</option>
-            <option value="3">3</option>
+            <option selected value="3">3</option>
             <option
               value="4"
-              selected
             >
               4
             </option>
