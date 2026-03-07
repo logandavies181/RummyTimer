@@ -7,6 +7,8 @@ import Sidebar from "./src/components/sidebar.ts"
 import PieSegments from "./src/components/pieSegments.ts"
 import TimeNumber from "./src/components/timeNumber.ts"
 
+import "./src/wakeLock.ts"
+
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("sw.js", { scope: "/" })
 }

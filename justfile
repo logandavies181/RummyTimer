@@ -3,7 +3,7 @@
 
 alias c := check
 @check:
-    deno check **/*.ts
+    deno check .
 
 alias b := build
 @build: clean check
