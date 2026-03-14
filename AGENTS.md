@@ -7,6 +7,13 @@ This app uses [htm](https://github.com/developit/htm) and [preact](https://githu
 
 A simple state-management and observer pattern is implemented in `src/state.ts`.
 
+## The application
+
+This is a simple timer app for use with board games. It is intended to be used on a mobile device or tablet placed on
+the table between players to track whose turn it is and how much time they have left.
+
+The colour segments are used to represent whose turn it is - i.e. which player is "active".
+
 ## Commands
 
 Instead of `deno task` or `npm run`, we leverage `just` to orchestrate commands in a simple, language agnostic way.
