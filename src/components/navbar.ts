@@ -11,7 +11,7 @@ export function Navbar() {
       <div class="bg-blue-300 flex flex-row">
         <img
           class="ml-2"
-          src="/favicon.svg"
+          src="./favicon.svg"
           width="50"
           height="50"
         />
@@ -22,7 +22,7 @@ export function Navbar() {
         <img
           onClick=${onClick}
           class="mr-2"
-          src="/hamburger.svg"
+          src="./hamburger.svg"
           width="40"
           height="40"
         />

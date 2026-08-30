@@ -83,6 +83,7 @@ function pieSegments({ segments = 6, size = 240, colors = [], activePlayer = 0 }
           d=${activePlayerArcPath}
           stroke="black"
           fill="none"
+          class="drop-shadow-[0_0_8px_rgba(0,0,0,0.8)]"
           onClick=${onClickFactory(i)}
         />`,
       )
