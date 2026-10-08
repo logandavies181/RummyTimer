@@ -11,7 +11,9 @@ There should be a wakelock so the screen doesn't dim while the players are playi
 
 ## Code Style
 
-This is a Deno project and doesn't use dependencies outside of @std.
+This is a vanillajs Deno project and doesn't use dependencies outside of @std.
+
+Use `python3 -m http.server` to serve the app for local development.
 
 If a function takes an object as an argument, it must be specified as a named type, rather than defined anonymously.
 

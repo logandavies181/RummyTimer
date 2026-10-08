@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta
+      name="theme-color"
+      content="#8ec5ff"
+    />
+    <title>RummyTimer</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="favicon.svg"
+    />
+    <link
+      rel="manifest"
+      href="manifest.json"
+    />
+    <link
+      rel="stylesheet"
+      href="style.css"
+    />
+    <script
+      src="main.js"
+      type="module"
+    ></script>
+  </head>
+  <body>
+    <div class="app">
+      <nav class="navbar">
+        <img
+          class="navbar-logo"
+          src="favicon.svg"
+          alt=""
+          width="40"
+          height="40"
+        />
+        <span class="navbar-brand">RummyTimer</span>
+        <button
+          class="navbar-menu"
+          id="menu-button"
+          type="button"
+          aria-label="Settings"
+          aria-controls="sidebar"
+          aria-expanded="false"
+        >
+          <img
+            src="hamburger.svg"
+            alt=""
+            width="24"
+            height="24"
+          />
+        </button>
+      </nav>
+
+      <main class="stage">
+        <svg
+          class="pie"
+          id="pie"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="xMidYMid slice"
+        ></svg>
+
+        <div
+          class="face"
+          id="face"
+        >
+          <svg
+            class="face-ring"
+            viewBox="0 0 100 100"
+            aria-hidden="true"
+          >
+            <circle
+              class="face-ring-track"
+              cx="50"
+              cy="50"
+              r="45"
+            ></circle>
+            <circle
+              class="face-ring-progress"
+              id="face-ring"
+              cx="50"
+              cy="50"
+              r="45"
+            ></circle>
+          </svg>
+          <div class="face-disc">
+            <span
+              class="face-time"
+              id="face-time"
+              >30</span
+            >
+            <button
+              class="face-toggle"
+              id="toggle-button"
+              type="button"
+              aria-label="Pause"
+            >
+              <svg
+                class="icon icon-play"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M8 5v14l11-7z"></path>
+              </svg>
+              <svg
+                class="icon icon-pause"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M6 5h4v14H6zM14 5h4v14h-4z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </main>
+
+      <div
+        class="scrim"
+        id="scrim"
+        hidden
+      ></div>
+
+      <aside
+        class="sidebar"
+        id="sidebar"
+        aria-label="Settings"
+        aria-hidden="true"
+      >
+        <div class="sidebar-header">
+          <h2 class="sidebar-title">Settings</h2>
+          <button
+            class="sidebar-close"
+            id="close-button"
+            type="button"
+            aria-label="Close settings"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <path d="M6 18 17.94 6M18 18 6.06 6"></path>
+            </svg>
+          </button>
+        </div>
+
+        <label
+          class="field"
+          for="player-count"
+          >Number of players</label
+        >
+        <select
+          class="control"
+          id="player-count"
+        >
+          <option value="2">2</option>
+          <option
+            value="3"
+            selected
+          >
+            3
+          </option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+
+        <label
+          class="field"
+          for="turn-duration"
+          >Turn length</label
+        >
+        <select
+          class="control"
+          id="turn-duration"
+        >
+          <option value="15000">15 seconds</option>
+          <option
+            value="30000"
+            selected
+          >
+            30 seconds
+          </option>
+          <option value="45000">45 seconds</option>
+          <option value="60000">1 minute</option>
+          <option value="120000">2 minutes</option>
+        </select>
+
+        <button
+          class="sidebar-reset"
+          id="reset-button"
+          type="button"
+        >
+          Reset game
+        </button>
+      </aside>
+    </div>
+  </body>
+</html>

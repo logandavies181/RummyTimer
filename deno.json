@@ -1,6 +1,20 @@
 {
+  "imports": {
+    "@std/assert": "jsr:@std/assert@^1"
+  },
+  "tasks": {
+    "check": "deno check .",
+    "test": "deno test src/*.ts",
+    "fmt": "deno fmt",
+    "build": "deno task check && rm -rf dist && mkdir -p dist && deno bundle main.ts --platform browser --outdir dist && cp index.html style.css manifest.json dist/ && cp public/favicon.svg public/hamburger.svg dist/",
+    "serve": "deno task build && cd dist && python3 -m http.server 8080"
+  },
   "fmt": {
     "lineWidth": 120,
     "singleQuote": true
-  }
+  },
+  "compilerOptions": {
+    "lib": ["deno.ns", "dom", "dom.iterable", "dom.asynciterable", "esnext"]
+  },
+  "exclude": ["dist"]
 }
