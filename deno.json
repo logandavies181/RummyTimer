@@ -1,14 +1,6 @@
 {
-  "nodeModulesDir": "auto",
-  "imports": {
-    "@tailwindcss/cli": "npm:@tailwindcss/cli@^4.1.17",
-    "htm": "npm:htm@3.1.1",
-    "preact": "npm:preact@10.25.3",
-    "prettier": "npm:prettier@^3.4.2",
-    "tailwindcss": "npm:tailwindcss@^4.0.0"
-  },
-  "deploy": {
-    "org": "logandavies181",
-    "app": "rummytimer"
+  "fmt": {
+    "lineWidth": 120,
+    "singleQuote": true
   }
 }
