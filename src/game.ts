@@ -9,7 +9,6 @@ export type Game = {
   durationMs: number
   remainingMs: number
   sinceMs: number
-  running: boolean
 }
 
 export const defaultConfig: GameConfig = { playerCount: 3, durationMs: 30_000 }
@@ -21,12 +20,10 @@ export function createGame(config: GameConfig, now: number): Game {
     durationMs: config.durationMs,
     remainingMs: config.durationMs,
     sinceMs: now,
-    running: true,
   }
 }
 
 export function timeLeft(game: Game, now: number): number {
-  if (!game.running) return game.remainingMs
   return Math.max(0, game.remainingMs - (now - game.sinceMs))
 }
 
@@ -39,16 +36,8 @@ export function advanceTurn(game: Game, now: number): Game {
   }
 }
 
-export function toggleRunning(game: Game, now: number): Game {
-  if (game.running) {
-    return { ...game, running: false, remainingMs: timeLeft(game, now) }
-  }
-  const remainingMs = game.remainingMs > 0 ? game.remainingMs : game.durationMs
-  return { ...game, running: true, remainingMs, sinceMs: now }
-}
-
 export function expire(game: Game): Game {
-  return { ...game, running: false, remainingMs: 0 }
+  return { ...game, remainingMs: 0 }
 }
 
 export function resetGame(game: Game, now: number): Game {
@@ -79,14 +68,12 @@ if (typeof Deno !== 'undefined') {
       durationMs: 60_000,
       remainingMs: 60_000,
       sinceMs: 1000,
-      running: true,
     })
   })
 
-  Deno.test('timeLeft counts down while running and holds still while paused', () => {
+  Deno.test('timeLeft counts down as time passes', () => {
     const game = createGame(defaultConfig, 1000)
     assertEquals(timeLeft(game, 3500), 27_500)
-    assertEquals(timeLeft(toggleRunning(game, 3500), 9000), 27_500)
   })
 
   Deno.test('timeLeft stops at zero', () => {
@@ -104,18 +91,11 @@ if (typeof Deno !== 'undefined') {
     assertEquals(timeLeft(game, 7000), 30_000)
   })
 
-  Deno.test('a spent turn restarts when the timer is toggled again', () => {
+  Deno.test('an expired turn stays expired until the turn advances', () => {
     const expired = expire(createGame(defaultConfig, 0))
-    const resumed = toggleRunning(expired, 1000)
-    assertEquals(resumed.running, true)
-    assertEquals(resumed.remainingMs, defaultConfig.durationMs)
-  })
-
-  Deno.test('pausing an expired turn and resuming it also restarts the turn', () => {
-    const paused = toggleRunning(expire(createGame(defaultConfig, 0)), 1000)
-    const resumed = toggleRunning(paused, 2000)
-    assertEquals(resumed.remainingMs, defaultConfig.durationMs)
-    assertEquals(resumed.running, true)
+    assertEquals(timeLeft(expired, 5000), 0)
+    const next = advanceTurn(expired, 6000)
+    assertEquals(timeLeft(next, 6000), defaultConfig.durationMs)
   })
 
   Deno.test('resetGame returns to the first player with a full clock', () => {

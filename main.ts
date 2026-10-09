@@ -7,7 +7,6 @@ import {
   setDuration,
   setPlayerCount,
   timeLeft,
-  toggleRunning,
   type Game,
 } from './src/game.ts'
 import { mountFace } from './src/face.ts'
@@ -33,8 +32,6 @@ const face = mountFace({
   root: requiredElement<HTMLElement>('#face'),
   time: requiredElement<HTMLElement>('#face-time'),
   ring: requiredElement<SVGCircleElement>('#face-ring'),
-  toggle: requiredElement<HTMLButtonElement>('#toggle-button'),
-  onToggle: () => setGame(toggleRunning(game, Date.now())),
 })
 
 const sidebar = mountSidebar({
@@ -64,7 +61,7 @@ function render(): void {
 
 function scheduleTick(): void {
   cancelAnimationFrame(frameId)
-  if (game.running) frameId = requestAnimationFrame(tick)
+  if (timeLeft(game, Date.now()) > 0) frameId = requestAnimationFrame(tick)
 }
 
 function tick(): void {

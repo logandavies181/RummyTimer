@@ -147,42 +147,6 @@ body {
   color: #0f172a;
 }
 
-.face-toggle {
-  display: grid;
-  place-items: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: rgba(15, 23, 42, 0.08);
-  color: #0f172a;
-  cursor: pointer;
-}
-
-.face-toggle:active {
-  background: rgba(15, 23, 42, 0.2);
-}
-
-.face-toggle .icon {
-  display: block;
-  width: 1.375rem;
-  height: 1.375rem;
-  fill: currentColor;
-}
-
-.face-toggle .icon-pause {
-  display: none;
-}
-
-.face.is-running .face-toggle .icon-play {
-  display: none;
-}
-
-.face.is-running .face-toggle .icon-pause {
-  display: block;
-}
-
 .face.is-expired .face-disc {
   background: #fee2e2;
   animation: face-pulse 1s ease-in-out infinite;
