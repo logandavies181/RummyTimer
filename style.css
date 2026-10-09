@@ -102,7 +102,7 @@ body {
   top: 50%;
   left: 50%;
   z-index: 10;
-  width: min(64vmin, 20rem);
+  width: min(34vmin, 12rem);
   aspect-ratio: 1;
   transform: translate(-50%, -50%);
 }
@@ -146,7 +146,7 @@ body {
 }
 
 .face-time {
-  font-size: clamp(3rem, 26vmin, 6rem);
+  font-size: clamp(1.75rem, 14vmin, 3.5rem);
   font-weight: 700;
   line-height: 1;
   font-variant-numeric: tabular-nums;
