@@ -39,7 +39,7 @@ export function mountPie(options: PieOptions): Pie {
       }
 
       for (let index = 0; index < game.playerCount; index++) {
-        segments.push(divider({ index, count: game.playerCount, activeIndex: game.activeIndex }))
+        segments.push(divider({ index, count: game.playerCount }))
       }
 
       options.svg.replaceChildren(...segments)
@@ -50,7 +50,6 @@ export function mountPie(options: PieOptions): Pie {
 type DividerSpec = {
   index: number
   count: number
-  activeIndex: number
 }
 
 function divider(spec: DividerSpec): SVGLineElement {
@@ -60,10 +59,6 @@ function divider(spec: DividerSpec): SVGLineElement {
   line.setAttribute('y1', `${pieCenter}`)
   line.setAttribute('x2', `${edge.x}`)
   line.setAttribute('y2', `${edge.y}`)
-
-  if (spec.index === spec.activeIndex || spec.index === (spec.activeIndex + 1) % spec.count) {
-    line.classList.add('is-active')
-  }
 
   return line
 }
