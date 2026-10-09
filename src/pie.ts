@@ -2,6 +2,7 @@ import type { Game } from './game.ts'
 
 const svgNamespace = 'http://www.w3.org/2000/svg'
 const pieSize = 100
+const pieCenter = pieSize / 2
 
 const playerColors = ['#fb2c36', '#2b7fff', '#05df72', '#ffdf20', '#ad46ff', '#ff6900']
 
@@ -21,7 +22,7 @@ export function playerColor(index: number): string {
 export function mountPie(options: PieOptions): Pie {
   return {
     render(game) {
-      const wedges: SVGPathElement[] = []
+      const segments: SVGElement[] = []
 
       for (let index = 0; index < game.playerCount; index++) {
         const wedge = document.createElementNS(svgNamespace, 'path')
@@ -34,12 +35,37 @@ export function mountPie(options: PieOptions): Pie {
           wedge.append(label('End turn'))
         }
 
-        wedges.push(wedge)
+        segments.push(wedge)
       }
 
-      options.svg.replaceChildren(...wedges)
+      for (let index = 0; index < game.playerCount; index++) {
+        segments.push(divider({ index, count: game.playerCount, activeIndex: game.activeIndex }))
+      }
+
+      options.svg.replaceChildren(...segments)
     },
   }
+}
+
+type DividerSpec = {
+  index: number
+  count: number
+  activeIndex: number
+}
+
+function divider(spec: DividerSpec): SVGLineElement {
+  const edge = edgePoint(spec.index, spec.count, pieSize)
+  const line = document.createElementNS(svgNamespace, 'line')
+  line.setAttribute('x1', `${pieCenter}`)
+  line.setAttribute('y1', `${pieCenter}`)
+  line.setAttribute('x2', `${edge.x}`)
+  line.setAttribute('y2', `${edge.y}`)
+
+  if (spec.index === spec.activeIndex || spec.index === (spec.activeIndex + 1) % spec.count) {
+    line.classList.add('is-active')
+  }
+
+  return line
 }
 
 function label(text: string): SVGTitleElement {
@@ -54,15 +80,22 @@ type WedgeSpec = {
   size: number
 }
 
+type Point = {
+  x: number
+  y: number
+}
+
+function edgePoint(index: number, count: number, size: number): Point {
+  const radius = size / 2
+  const angle = (index / count) * 2 * Math.PI - Math.PI / 2
+  return { x: round(radius + radius * Math.cos(angle)), y: round(radius + radius * Math.sin(angle)) }
+}
+
 function wedgePath(spec: WedgeSpec): string {
   const radius = spec.size / 2
-  const startAngle = (spec.index / spec.count) * 2 * Math.PI - Math.PI / 2
-  const endAngle = ((spec.index + 1) / spec.count) * 2 * Math.PI - Math.PI / 2
-  const x1 = round(radius + radius * Math.cos(startAngle))
-  const y1 = round(radius + radius * Math.sin(startAngle))
-  const x2 = round(radius + radius * Math.cos(endAngle))
-  const y2 = round(radius + radius * Math.sin(endAngle))
-  return `M${round(radius)} ${round(radius)}L${x1} ${y1}A${radius} ${radius} 0 0 1 ${x2} ${y2}Z`
+  const start = edgePoint(spec.index, spec.count, spec.size)
+  const end = edgePoint(spec.index + 1, spec.count, spec.size)
+  return `M${round(radius)} ${round(radius)}L${start.x} ${start.y}A${radius} ${radius} 0 0 1 ${end.x} ${end.y}Z`
 }
 
 function round(value: number): number {
@@ -84,6 +117,13 @@ if (typeof Deno !== 'undefined') {
 
   Deno.test('wedges shrink as players are added', () => {
     assertEquals(wedgePath({ index: 0, count: 6, size: 100 }), 'M50 50L50 0A50 50 0 0 1 93.3 25Z')
+  })
+
+  Deno.test('dividers run from the centre out to the rim', () => {
+    assertEquals(edgePoint(0, 4, 100), { x: 50, y: 0 })
+    assertEquals(edgePoint(1, 4, 100), { x: 100, y: 50 })
+    assertEquals(edgePoint(2, 4, 100), { x: 50, y: 100 })
+    assertEquals(edgePoint(3, 4, 100), { x: 0, y: 50 })
   })
 
   Deno.test('playerColor wraps around the palette', () => {
