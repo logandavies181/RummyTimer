@@ -8,7 +8,7 @@ const playerColors = ['#fb2c36', '#2b7fff', '#05df72', '#ffdf20', '#ad46ff', '#f
 
 export type PieOptions = {
   svg: SVGSVGElement
-  onAdvance: () => void
+  onAdvance: (index: number) => void
 }
 
 export type Pie = {
@@ -29,10 +29,12 @@ export function mountPie(options: PieOptions): Pie {
         wedge.setAttribute('d', wedgePath({ index, count: game.playerCount, size: pieSize }))
         wedge.setAttribute('fill', playerColor(index))
 
-        if (index === game.activeIndex) {
+        if (game.activeIndex >= 0 && index === game.activeIndex) {
           wedge.classList.add('is-active')
-          wedge.addEventListener('click', options.onAdvance)
+          wedge.addEventListener('click', () => options.onAdvance(index))
           wedge.append(label('End turn'))
+        } else if (game.activeIndex < 0) {
+          wedge.addEventListener('click', () => options.onAdvance(index))
         }
 
         segments.push(wedge)

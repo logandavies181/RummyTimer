@@ -24,8 +24,8 @@ export function mountFace(options: FaceOptions): Face {
 
       options.time.textContent = secondsLabel(remainingMs)
       options.ring.style.strokeDashoffset = `${ringCircumference * (1 - fraction)}`
-      options.ring.style.stroke = playerColor(game.activeIndex)
-      options.root.classList.toggle('is-expired', remainingMs === 0)
+      options.ring.style.stroke = game.activeIndex >= 0 ? playerColor(game.activeIndex) : '#dfe7f5'
+      options.root.classList.toggle('is-expired', remainingMs === 0 && game.activeIndex >= 0)
     },
   }
 }

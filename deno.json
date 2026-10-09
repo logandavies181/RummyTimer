@@ -6,7 +6,7 @@
     "check": "deno check .",
     "test": "deno test src/*.ts",
     "fmt": "deno fmt",
-    "build": "deno task check && rm -rf dist && mkdir -p dist && deno bundle main.ts --platform browser --outdir dist && cp index.html style.css manifest.json dist/ && cp -R public dist/",
+    "build": "deno task check && rm -rf dist && mkdir -p dist && deno bundle main.ts --platform browser --outdir dist && cp index.html manifest.json dist/ && cp public/* dist/",
     "serve": "deno task build && cd dist && python3 -m http.server 8080"
   },
   "fmt": {

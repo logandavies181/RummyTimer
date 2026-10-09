@@ -1,5 +1,6 @@
 import {
   advanceTurn,
+  claimTurn,
   createGame,
   defaultConfig,
   expire,
@@ -25,7 +26,7 @@ let frameId = 0
 
 const pie = mountPie({
   svg: requiredElement<SVGSVGElement>('#pie'),
-  onAdvance: () => setGame(advanceTurn(game, Date.now())),
+  onAdvance: (index) => setGame(claimTurn(game, index, Date.now())),
 })
 
 const face = mountFace({
@@ -61,11 +62,12 @@ function render(): void {
 
 function scheduleTick(): void {
   cancelAnimationFrame(frameId)
-  if (timeLeft(game, Date.now()) > 0) frameId = requestAnimationFrame(tick)
+  if (game.activeIndex >= 0 && timeLeft(game, Date.now()) > 0) frameId = requestAnimationFrame(tick)
 }
 
 function tick(): void {
   const now = Date.now()
+  if (game.activeIndex < 0) return
   if (timeLeft(game, now) === 0) {
     setGame(expire(game))
     return
